@@ -93,6 +93,7 @@ resource "azurerm_netapp_volume" "anf01_vol01" {
       cifs_enabled      = true
       nfsv3_enabled     = false
       nfsv4_enabled     = false
+      protocols_enabled = ["smb"]
       #unix_read_only    = false
       #unix_read_write   = true
   }
