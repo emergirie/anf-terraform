@@ -34,14 +34,6 @@ resource "azurerm_netapp_account" "anf01_account" {
   name                = var.anf01_account_name
   resource_group_name = azurerm_resource_group.rg01.name
   location            = azurerm_resource_group.rg01.location
-  #active_directory {
-  #  username            = "aduser"
-  #  password            = "aduserpwd"
-  #  smb_server_name     = "SMBSERVER"
-  #  dns                 = ["1.2.3.4"]
-  #  domain              = "westcentralus.com"
-  #  organizational_unit = "OU=FirstLevel"
-  #}
 }
 
 resource "azurerm_netapp_pool" "anf01_pool01" {
@@ -63,4 +55,15 @@ resource "azurerm_netapp_volume" "anf01_vol01" {
   service_level       = azurerm_netapp_pool.anf01_pool01.service_level
   subnet_id           = azurerm_subnet.vnet01_subnetanf.id
   storage_quota_in_gb = var.anf01_pool01_vol01_storage_quota_in_gb
+  # future (maybe 2.1.0)
+  #protocols           = ["nfsv3"]
+  export_policy_rule {
+      rule_index        = 1
+      allowed_clients   = ["0.0.0.0/0"]
+      cifs_enabled      = false
+      nfsv3_enabled     = true
+      nfsv4_enabled     = false
+      #unix_read_only    = false
+      #unix_read_write   = true
+  }
 }

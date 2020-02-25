@@ -85,8 +85,8 @@ resource "azurerm_netapp_volume" "anf01_vol01" {
   service_level       = azurerm_netapp_pool.anf01_pool01.service_level
   subnet_id           = azurerm_subnet.vnet01_subnetanf.id
   storage_quota_in_gb = var.anf01_pool01_vol01_storage_quota_in_gb
-  # will come in v2.0.0 or v2.1.0
-  #protocols           = ["CIFS"]
+  # future (maybe 2.1.0)
+  #protocols           = ["smb"]
   export_policy_rule {
       rule_index        = 1
       allowed_clients   = ["0.0.0.0/0"]
